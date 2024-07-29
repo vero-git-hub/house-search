@@ -1,4 +1,6 @@
 import { createApp } from 'vue';
-import App from './App.vue';
+import SearchForm from './components/SearchForm.vue';
 
-createApp(App).mount('#app');
+const app = createApp({});
+app.component('search-form', SearchForm);
+app.mount('#app');

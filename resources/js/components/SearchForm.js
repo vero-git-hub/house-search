@@ -5,12 +5,12 @@ export default {
     setup() {
         const form = ref({
             name: '',
-            bedrooms: null,
-            bathrooms: null,
-            storeys: null,
-            garages: null,
-            priceMin: null,
-            priceMax: null,
+            bedrooms: '',
+            bathrooms: '',
+            storeys: '',
+            garages: '',
+            priceMin: '',
+            priceMax: '',
         });
         const houses = ref([]);
         const loading = ref(false);
@@ -19,9 +19,17 @@ export default {
         const searchHouses = async () => {
             loading.value = true;
             searchInitiated.value = true;
+
+            const params = {};
+            for (const key in form.value) {
+                if (form.value[key] !== '') {
+                    params[key] = form.value[key];
+                }
+            }
+
             try {
                 const response = await axios.get('http://127.0.0.1:8000/api/houses', {
-                    params: form.value,
+                    params: params,
                 });
                 houses.value = response.data;
             } catch (error) {

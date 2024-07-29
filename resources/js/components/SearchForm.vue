@@ -1,63 +1,48 @@
 <template>
     <div class="search-form">
-        <h2>Search Houses</h2>
-        <form @submit.prevent="searchHouses">
-            <div>
-                <label for="name">Name:</label>
-                <input type="text" id="name" v-model="form.name">
-            </div>
-            <div>
-                <label for="bedrooms">Bedrooms:</label>
-                <input type="number" id="bedrooms" v-model="form.bedrooms">
-            </div>
-            <div>
-                <label for="bathrooms">Bathrooms:</label>
-                <input type="number" id="bathrooms" v-model="form.bathrooms">
-            </div>
-            <div>
-                <label for="storeys">Storeys:</label>
-                <input type="number" id="storeys" v-model="form.storeys">
-            </div>
-            <div>
-                <label for="garages">Garages:</label>
-                <input type="number" id="garages" v-model="form.garages">
-            </div>
-            <div>
-                <label for="priceMin">Price Min:</label>
-                <input type="number" id="priceMin" v-model="form.priceMin">
-            </div>
-            <div>
-                <label for="priceMax">Price Max:</label>
-                <input type="number" id="priceMax" v-model="form.priceMax">
-            </div>
-            <button type="submit">Search</button>
-        </form>
+        <el-card class="search-card">
+            <el-divider>
+                <h2>Search Houses</h2>
+            </el-divider>
+            <el-form @submit.prevent="searchHouses" :model="form" label-width="120px" label-position="left">
+                <el-form-item label="Name">
+                    <el-input v-model="form.name"></el-input>
+                </el-form-item>
+                <el-form-item label="Bedrooms">
+                    <el-input type="number" v-model="form.bedrooms"></el-input>
+                </el-form-item>
+                <el-form-item label="Bathrooms">
+                    <el-input type="number" v-model="form.bathrooms"></el-input>
+                </el-form-item>
+                <el-form-item label="Storeys">
+                    <el-input type="number" v-model="form.storeys"></el-input>
+                </el-form-item>
+                <el-form-item label="Garages">
+                    <el-input type="number" v-model="form.garages"></el-input>
+                </el-form-item>
+                <el-form-item label="Price Min">
+                    <el-input type="number" v-model="form.priceMin"></el-input>
+                </el-form-item>
+                <el-form-item label="Price Max">
+                    <el-input type="number" v-model="form.priceMax"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="searchHouses">Search</el-button>
+                </el-form-item>
+            </el-form>
+        </el-card>
 
         <div v-if="loading" class="loader"></div>
         <div v-if="houses.length > 0">
             <h3>Search Results:</h3>
-            <table>
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Bedrooms</th>
-                    <th>Bathrooms</th>
-                    <th>Storeys</th>
-                    <th>Garages</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="house in houses" :key="house.id">
-                    <td>{{ house.name }}</td>
-                    <td>{{ house.bedrooms }}</td>
-                    <td>{{ house.bathrooms }}</td>
-                    <td>{{ house.storeys }}</td>
-                    <td>{{ house.garages }}</td>
-                    <td>{{ house.price }}</td>
-                </tr>
-                </tbody>
-            </table>
+            <el-table :data="houses" border style="width: 100%">
+                <el-table-column prop="name" label="Name"></el-table-column>
+                <el-table-column prop="bedrooms" label="Bedrooms"></el-table-column>
+                <el-table-column prop="bathrooms" label="Bathrooms"></el-table-column>
+                <el-table-column prop="storeys" label="Storeys"></el-table-column>
+                <el-table-column prop="garages" label="Garages"></el-table-column>
+                <el-table-column prop="price" label="Price"></el-table-column>
+            </el-table>
         </div>
 
         <div v-if="searchInitiated && !loading && houses.length === 0" class="no-results">No results found.</div>

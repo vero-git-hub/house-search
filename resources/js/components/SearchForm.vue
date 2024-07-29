@@ -28,6 +28,7 @@
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="searchHouses">Search</el-button>
+                    <el-button @click="showAllHouses">Show All</el-button>
                 </el-form-item>
             </el-form>
         </el-card>

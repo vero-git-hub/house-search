@@ -1,0 +1,39 @@
+.search-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-form form div {
+    margin-bottom: 10px;
+}
+
+.search-form form label {
+    margin-right: 10px;
+}
+
+.search-form form input {
+    padding: 5px;
+}
+
+.search-form form button {
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}

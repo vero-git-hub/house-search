@@ -60,7 +60,7 @@
             </table>
         </div>
 
-        <div v-if="!loading && houses.length === 0" class="no-results">No results found.</div>
+        <div v-if="searchInitiated && !loading && houses.length === 0" class="no-results">No results found.</div>
     </div>
 </template>
 

@@ -33,7 +33,7 @@
             <button type="submit">Search</button>
         </form>
 
-        <div v-if="loading">Loading...</div>
+        <div v-if="loading" class="loader"></div>
         <div v-if="houses.length > 0">
             <h3>Search Results:</h3>
             <table>
@@ -60,7 +60,7 @@
             </table>
         </div>
 
-        <div v-if="!loading && houses.length === 0">No results found.</div>
+        <div v-if="!loading && houses.length === 0" class="no-results">No results found.</div>
     </div>
 </template>
 

@@ -2,36 +2,38 @@ import { ref } from 'vue';
 import axios from 'axios';
 
 export default {
-    data() {
-        return {
-            form: {
-                name: '',
-                bedrooms: null,
-                bathrooms: null,
-                storeys: null,
-                garages: null,
-                priceMin: null,
-                priceMax: null,
-            },
-            houses: [],
-            loading: false,
-            error: null,
-        };
-    },
-    methods: {
-        async searchHouses() {
-            this.loading = true;
-            this.error = null;
+    setup() {
+        const form = ref({
+            name: '',
+            bedrooms: null,
+            bathrooms: null,
+            storeys: null,
+            garages: null,
+            priceMin: null,
+            priceMax: null,
+        });
+        const houses = ref([]);
+        const loading = ref(false);
+
+        const searchHouses = async () => {
+            loading.value = true;
             try {
                 const response = await axios.get('http://127.0.0.1:8000/api/houses', {
-                    params: this.form,
+                    params: form.value,
                 });
-                this.houses = response.data;
+                houses.value = response.data;
             } catch (error) {
-                this.error = 'An error occurred while searching for houses.';
+                console.error(error);
             } finally {
-                this.loading = false;
+                loading.value = false;
             }
-        },
+        };
+
+        return {
+            form,
+            houses,
+            loading,
+            searchHouses,
+        };
     },
 };
